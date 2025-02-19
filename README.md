@@ -11,13 +11,13 @@ This service provides integration with Gmail API, allowing you to manage emails,
 - `list-drafts`: List all draft emails
 - `update-draft`: Update an existing draft
 
-### Message Management
-- `list-messages`: List messages in the mailbox
-- `get-message`: Get details of a specific message
-- `modify-message`: Modify labels on a message
-- `send-message`: Send a new email message
-- `trash-message`: Move a message to trash
-- `untrash-message`: Remove a message from trash
+### Mail Management
+- `list-mails`: List messages in the mailbox
+- `get-mail`: Get details of a specific message
+- `modify-mail-labels`: Modify labels on a message
+- `send-mail`: Send a new email message
+- `trash-mail`: Move a message to trash
+- `untrash-mail`: Remove a message from trash
 
 ### Label Management
 - `list-labels`: List all labels in the mailbox
@@ -45,6 +45,4 @@ The service requires the following Google OAuth scopes:
 - `https://www.googleapis.com/auth/gmail.labels`
 - `email`
 - `profile`
-
-## Development
 

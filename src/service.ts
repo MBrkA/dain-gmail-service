@@ -5,16 +5,16 @@ import { deleteDraftConfig } from "./tools/drafts/delete-draft-tool";
 import { getDraftConfig } from "./tools/drafts/get-draft-tool";
 import { listDraftsConfig } from "./tools/drafts/list-drafts-tool";
 import { updateDraftConfig } from "./tools/drafts/update-draft-tool";
-import { listMessagesConfig } from "./tools/messages/list-messages-tool";
-import { getMessageConfig } from "./tools/messages/get-message-tool";
-import { modifyMessageConfig } from "./tools/messages/modify-message-tool";
-import { sendMailConfig } from "./tools/messages/send-mail-tool";
-import { trashMessageConfig } from "./tools/messages/trash-message-tool";
-import { untrashMessageConfig } from "./tools/messages/untrash-message-tool";
 import { listLabelsConfig } from "./tools/labels/list-labels-tool";
 import { createLabelConfig } from "./tools/labels/create-label-tool";
 import { updateLabelConfig } from "./tools/labels/update-label-tool";
 import { deleteLabelConfig } from "./tools/labels/delete-label-tool";
+import { modifyMailLabelsConfig } from "./tools/mails/modify-mail-labels-tool";
+import { untrashMailConfig } from "./tools/mails/untrash-mail-tool";
+import { trashMailConfig } from "./tools/mails/trash-mail-tool";
+import { getMailConfig } from "./tools/mails/get-mail-tool";
+import { listMailsConfig } from "./tools/mails/list-mails-tool";
+import { sendMailConfig } from "./tools/mails/send-mail-tool";
 
 export const dainService = defineDAINService({
   metadata: {
@@ -35,11 +35,11 @@ export const dainService = defineDAINService({
     getDraftConfig,
     listDraftsConfig,
     updateDraftConfig,
-    listMessagesConfig,
-    getMessageConfig,
-    trashMessageConfig,
-    untrashMessageConfig,
-    modifyMessageConfig,
+    listMailsConfig,
+    getMailConfig,
+    trashMailConfig,
+    untrashMailConfig,
+    modifyMailLabelsConfig,
     sendMailConfig,
     listLabelsConfig,
     createLabelConfig,
