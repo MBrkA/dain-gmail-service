@@ -4,7 +4,6 @@ import { createDraftConfig } from "./tools/drafts/create-draft-tool";
 import { deleteDraftConfig } from "./tools/drafts/delete-draft-tool";
 import { getDraftConfig } from "./tools/drafts/get-draft-tool";
 import { listDraftsConfig } from "./tools/drafts/list-drafts-tool";
-import { sendDraftConfig } from "./tools/drafts/send-draft-tool";
 import { updateDraftConfig } from "./tools/drafts/update-draft-tool";
 import { listMessagesConfig } from "./tools/messages/list-messages-tool";
 import { getMessageConfig } from "./tools/messages/get-message-tool";
@@ -19,11 +18,12 @@ import { deleteLabelConfig } from "./tools/labels/delete-label-tool";
 
 export const dainService = defineDAINService({
   metadata: {
-    title: "Gmail Draft Creator",
-    description: "Create email drafts using Gmail API",
+    title: "Gmail Service",
+    description: "Gmail integration service for managing emails, drafts and labels",
     version: "1.0.0",
     author: "DAIN",
-    tags: ["gmail", "draft", "email"],
+    tags: ["gmail", "email", "labels"],
+    logo: "https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png",
   },
   identity: {
     apiKey: process.env.DAIN_API_KEY,
@@ -34,7 +34,6 @@ export const dainService = defineDAINService({
     deleteDraftConfig,
     getDraftConfig,
     listDraftsConfig,
-    //sendDraftConfig,
     updateDraftConfig,
     listMessagesConfig,
     getMessageConfig,

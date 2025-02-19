@@ -1,7 +1,7 @@
 {
-    "name": "dain",
+    "name": "gmail-service",
     "version": "1.0.0",
-    "description": "A Dain Protocol project",
+    "description": "Gmail integration service for DAIN Protocol",
     "main": "src/index.ts",
     "scripts": {
       "start": "ts-node src/index.ts",
@@ -12,7 +12,7 @@
     "dependencies": {
       "@dainprotocol/service-sdk": "^1.0.98",
       "@dainprotocol/utils": "^0.0.64",
-      "zod": "^3.23.8",
+      "zod": "^3.23.8", 
       "hono": "^4.6.3",
       "ts-node": "^10.4.0",
       "typescript": "^5.5.4",
@@ -21,4 +21,3 @@
       "axios": "^1.7.5"
     }
   }
-  
