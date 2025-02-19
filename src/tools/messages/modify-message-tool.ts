@@ -61,25 +61,11 @@ const modifyMessageConfig: ToolConfig = {
       );
 
       const message = response.data;
-      const headers = message.payload.headers;
-      const subject = headers.find((h: any) => h.name.toLowerCase() === 'subject')?.value || '(No Subject)';
-
-      const cardUI = new CardUIBuilder()
-        .title("Message Labels Modified")
-        .content(`
-          Message ID: ${message.id}
-          Subject: ${subject}
-          Current Labels: ${message.labelIds?.join(', ') || 'None'}
-          
-          Changes Made:
-          ${addLabelIds?.length ? `Added Labels: ${addLabelIds.join(', ')}\n` : ''}
-          ${removeLabelIds?.length ? `Removed Labels: ${removeLabelIds.join(', ')}` : ''}
-        `);
-
+      
       return {
         text: "Message labels modified successfully",
         data: message,
-        ui: cardUI.build(),
+        ui: undefined,
       };
     } catch (error: any) {
       console.error("Error modifying message:", error.response?.data || error);
