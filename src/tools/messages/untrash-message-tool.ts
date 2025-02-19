@@ -55,21 +55,15 @@ const untrashMessageConfig: ToolConfig = {
       );
 
       const message = response.data;
-      const headers = message.payload.headers;
-      const subject = headers.find((h: any) => h.name.toLowerCase() === 'subject')?.value || '(No Subject)';
-
-      const cardUI = new CardUIBuilder()
-        .title("Message Removed from Trash")
-        .content(`
-          Message ID: ${message.id}
-          Subject: ${subject}
-          Status: Removed from Trash
-        `);
+      const alertUI = new AlertUIBuilder()
+        .variant("success")
+        .title("Message labels modified successfully")
+        .message("Message labels modified successfully");
 
       return {
         text: "Message removed from trash successfully",
         data: message,
-        ui: cardUI.build(),
+        ui: alertUI.build(),
       };
     } catch (error: any) {
       console.error("Error untrashing message:", error.response?.data || error);

@@ -61,11 +61,15 @@ const modifyMessageConfig: ToolConfig = {
       );
 
       const message = response.data;
+      const alertUI = new AlertUIBuilder()
+        .variant("success")
+        .title("Message labels modified successfully")
+        .message("Message labels modified successfully");
       
       return {
         text: "Message labels modified successfully",
         data: message,
-        ui: undefined,
+        ui: alertUI.build(),
       };
     } catch (error: any) {
       console.error("Error modifying message:", error.response?.data || error);
