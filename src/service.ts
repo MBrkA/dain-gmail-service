@@ -7,6 +7,7 @@ import { listDraftsConfig } from "./tools/drafts/list-drafts-tool";
 import { sendDraftConfig } from "./tools/drafts/send-draft-tool";
 import { updateDraftConfig } from "./tools/drafts/update-draft-tool";
 import { listMessagesConfig } from "./tools/messages/list-messages-tool";
+import { getMessageConfig } from "./tools/messages/get-message-tool";
 
 export const dainService = defineDAINService({
   metadata: {
@@ -27,7 +28,8 @@ export const dainService = defineDAINService({
     listDraftsConfig, 
     //sendDraftConfig,
     updateDraftConfig,
-    listMessagesConfig
+    listMessagesConfig,
+    getMessageConfig
   ],
   oauth2: {
     baseUrl: process.env.TUNNEL_URL || "http://localhost:2022",
