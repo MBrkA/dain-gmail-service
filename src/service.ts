@@ -8,7 +8,7 @@ import { updateDraftConfig } from "./tools/drafts/update-draft-tool";
 import { listMessagesConfig } from "./tools/messages/list-messages-tool";
 import { getMessageConfig } from "./tools/messages/get-message-tool";
 import { modifyMessageConfig } from "./tools/messages/modify-message-tool";
-import { sendMessageConfig } from "./tools/messages/send-message-tool";
+import { sendMailConfig } from "./tools/messages/send-mail-tool";
 import { trashMessageConfig } from "./tools/messages/trash-message-tool";
 import { untrashMessageConfig } from "./tools/messages/untrash-message-tool";
 import { listLabelsConfig } from "./tools/labels/list-labels-tool";
@@ -40,7 +40,7 @@ export const dainService = defineDAINService({
     trashMessageConfig,
     untrashMessageConfig,
     modifyMessageConfig,
-    sendMessageConfig,
+    sendMailConfig,
     listLabelsConfig,
     createLabelConfig,
     updateLabelConfig,

@@ -9,17 +9,15 @@ import {
   OAuthUIBuilder,
 } from "@dainprotocol/utils";
 
-const modifyMessageConfig: ToolConfig = {
-  id: "modify-message",
-  name: "Modify Message Labels",
-  description: "Modifies the labels on a specified message",
+const trashMailConfig: ToolConfig = {
+  id: "trash-mail",
+  name: "Trash Mail",
+  description: "Moves the specified message to the trash",
   input: z.object({
-    messageId: z.string().describe("The ID of the message to modify"),
-    addLabelIds: z.array(z.string()).optional().describe("List of label IDs to add to the message"),
-    removeLabelIds: z.array(z.string()).optional().describe("List of label IDs to remove from the message"),
+    messageId: z.string().describe("The ID of the message to move to trash"),
   }),
   output: z.any(),
-  handler: async ({ messageId, addLabelIds, removeLabelIds }, agentInfo, { app }) => {
+  handler: async ({ messageId }, agentInfo, { app }) => {
     const tokens = getTokenStore().getToken(agentInfo.id);
 
     // Handle authentication
@@ -30,7 +28,7 @@ const modifyMessageConfig: ToolConfig = {
       }
       const oauthUI = new OAuthUIBuilder()
         .title("Google Authentication")
-        .content("Please authenticate with Google to modify message labels")
+        .content("Please authenticate with Google to trash messages")
         .logo(
           "https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
         )
@@ -45,17 +43,13 @@ const modifyMessageConfig: ToolConfig = {
     }
 
     try {
-      // Modify message via Gmail API
+      // Move message to trash via Gmail API
       const response = await axios.post(
-        `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}/modify`,
-        {
-          addLabelIds,
-          removeLabelIds,
-        },
+        `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}/trash`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${tokens.accessToken}`,
-            "Content-Type": "application/json",
           },
         }
       );
@@ -63,26 +57,26 @@ const modifyMessageConfig: ToolConfig = {
       const message = response.data;
       const alertUI = new AlertUIBuilder()
         .variant("success")
-        .title("Message labels modified successfully")
-        .message("Message labels modified successfully");
-      
+        .title("Message moved to trash successfully")
+        .message("Message moved to trash successfully");
+
       return {
-        text: "Message labels modified successfully",
+        text: "Message moved to trash successfully",
         data: message,
         ui: alertUI.build(),
       };
     } catch (error: any) {
-      console.error("Error modifying message:", error.response?.data || error);
+      console.error("Error trashing message:", error.response?.data || error);
 
       const alertUI = new AlertUIBuilder()
         .variant("error")
-        .title("Failed to Modify Message Labels")
+        .title("Failed to Trash Message")
         .message(
           error.response?.data?.error?.message || "An unknown error occurred"
         );
 
       return {
-        text: "Failed to modify message labels",
+        text: "Failed to move message to trash",
         data: undefined,
         ui: alertUI.build(),
       };
@@ -90,4 +84,4 @@ const modifyMessageConfig: ToolConfig = {
   },
 };
 
-export { modifyMessageConfig };
+export { trashMailConfig };

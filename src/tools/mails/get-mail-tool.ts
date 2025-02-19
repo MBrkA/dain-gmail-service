@@ -9,9 +9,9 @@ import {
   OAuthUIBuilder,
 } from "@dainprotocol/utils";
 
-const getMessageConfig: ToolConfig = {
-  id: "get-message",
-  name: "Get Message",
+const getMailConfig: ToolConfig = {
+  id: "get-mail",
+  name: "Get Mail",
   description: "Gets the specified message from Gmail",
   input: z.object({
     messageId: z.string().describe("The ID of the message to retrieve"),
@@ -121,4 +121,4 @@ const getMessageConfig: ToolConfig = {
   },
 };
 
-export { getMessageConfig };
+export { getMailConfig };

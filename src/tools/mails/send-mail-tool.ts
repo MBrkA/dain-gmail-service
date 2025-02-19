@@ -37,10 +37,10 @@ const InputSchema = z.object({
   references: z.array(z.string()).optional(), // Thread reference IDs
 });
 
-const sendMessageConfig: ToolConfig = {
-  id: "send-message",
-  name: "Send Email Message",
-  description: "Send a new email message via Gmail",
+const sendMailConfig: ToolConfig = {
+  id: "send-mail",
+  name: "Send Email",
+  description: "Send a new email via Gmail",
   input: InputSchema,
   output: z.any(),
   handler: async (input, agentInfo, { app }) => {
@@ -133,7 +133,7 @@ const sendMessageConfig: ToolConfig = {
       );
 
       const cardUI = new CardUIBuilder()
-        .title("Message Sent")
+        .title("Email Sent")
         .content(
           `Subject: ${input.subject}\nTo: ${input.to.map(formatAddress).join(", ")}`
         );
@@ -144,17 +144,17 @@ const sendMessageConfig: ToolConfig = {
         ui: cardUI.build(),
       };
     } catch (error: any) {
-      console.error("Error sending message:", error.response?.data || error);
+      console.error("Error sending email:", error.response?.data || error);
 
       const alertUI = new AlertUIBuilder()
         .variant("error")
-        .title("Failed to Send Message")
+        .title("Failed to Send Email")
         .message(
           error.response?.data?.error?.message || "An unknown error occurred"
         );
 
       return {
-        text: "Failed to send email message",
+        text: "Failed to send email",
         data: undefined,
         ui: alertUI.build(),
       };
@@ -162,4 +162,4 @@ const sendMessageConfig: ToolConfig = {
   },
 };
 
-export { sendMessageConfig };
+export { sendMailConfig };

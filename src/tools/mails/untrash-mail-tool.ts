@@ -9,12 +9,12 @@ import {
   OAuthUIBuilder,
 } from "@dainprotocol/utils";
 
-const trashMessageConfig: ToolConfig = {
-  id: "trash-message",
-  name: "Trash Message",
-  description: "Moves the specified message to the trash",
+const untrashMailConfig: ToolConfig = {
+  id: "untrash-mail",
+  name: "Untrash Mail", 
+  description: "Removes the specified message from the trash",
   input: z.object({
-    messageId: z.string().describe("The ID of the message to move to trash"),
+    messageId: z.string().describe("The ID of the message to remove from trash"),
   }),
   output: z.any(),
   handler: async ({ messageId }, agentInfo, { app }) => {
@@ -28,7 +28,7 @@ const trashMessageConfig: ToolConfig = {
       }
       const oauthUI = new OAuthUIBuilder()
         .title("Google Authentication")
-        .content("Please authenticate with Google to trash messages")
+        .content("Please authenticate with Google to untrash messages")
         .logo(
           "https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png"
         )
@@ -43,9 +43,9 @@ const trashMessageConfig: ToolConfig = {
     }
 
     try {
-      // Move message to trash via Gmail API
+      // Remove message from trash via Gmail API
       const response = await axios.post(
-        `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}/trash`,
+        `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}/untrash`,
         {},
         {
           headers: {
@@ -57,26 +57,26 @@ const trashMessageConfig: ToolConfig = {
       const message = response.data;
       const alertUI = new AlertUIBuilder()
         .variant("success")
-        .title("Message labels modified successfully")
-        .message("Message labels modified successfully");
+        .title("Message removed from trash successfully")
+        .message("Message removed from trash successfully");
 
       return {
-        text: "Message moved to trash successfully",
+        text: "Message removed from trash successfully",
         data: message,
         ui: alertUI.build(),
       };
     } catch (error: any) {
-      console.error("Error trashing message:", error.response?.data || error);
+      console.error("Error untrashing message:", error.response?.data || error);
 
       const alertUI = new AlertUIBuilder()
         .variant("error")
-        .title("Failed to Trash Message")
+        .title("Failed to Untrash Message")
         .message(
           error.response?.data?.error?.message || "An unknown error occurred"
         );
 
       return {
-        text: "Failed to move message to trash",
+        text: "Failed to remove message from trash",
         data: undefined,
         ui: alertUI.build(),
       };
@@ -84,4 +84,4 @@ const trashMessageConfig: ToolConfig = {
   },
 };
 
-export { trashMessageConfig };
+export { untrashMailConfig };

@@ -9,9 +9,9 @@ import {
   OAuthUIBuilder,
 } from "@dainprotocol/utils";
 
-const listMessagesConfig: ToolConfig = {
-  id: "list-messages",
-  name: "List Messages",
+const listMailConfig: ToolConfig = {
+  id: "list-mail",
+  name: "List Mail",
   description: "Lists the messages in the user's mailbox",
   input: z.object({
     maxResults: z.number().min(1).max(500).optional().default(100),
@@ -145,4 +145,4 @@ const listMessagesConfig: ToolConfig = {
   },
 };
 
-export { listMessagesConfig };
+export { listMailConfig };
