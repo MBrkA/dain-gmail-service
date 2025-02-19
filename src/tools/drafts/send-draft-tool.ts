@@ -45,7 +45,7 @@ const sendDraftConfig: ToolConfig = {
     try {
       // Send draft via Gmail API
       const response = await axios.post(
-        `https://gmail.googleapis.com/gmail/v1/users/me/drafts/${draftId}/send`,
+        `https://gmail.googleapis.com/upload/gmail/v1/users/me/drafts/me/send`,
         {
           id: draftId,
         },

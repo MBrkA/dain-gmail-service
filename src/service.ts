@@ -6,6 +6,7 @@ import { getDraftConfig } from "./tools/drafts/get-draft-tool";
 import { listDraftsConfig } from "./tools/drafts/list-drafts-tool";
 import { sendDraftConfig } from "./tools/drafts/send-draft-tool";
 import { updateDraftConfig } from "./tools/drafts/update-draft-tool";
+import { listMessagesConfig } from "./tools/messages/list-messages-tool";
 
 export const dainService = defineDAINService({
   metadata: {
@@ -24,8 +25,9 @@ export const dainService = defineDAINService({
     deleteDraftConfig,
     getDraftConfig,
     listDraftsConfig, 
-    sendDraftConfig,
-    updateDraftConfig
+    //sendDraftConfig,
+    updateDraftConfig,
+    listMessagesConfig
   ],
   oauth2: {
     baseUrl: process.env.TUNNEL_URL || "http://localhost:2022",
@@ -37,6 +39,7 @@ export const dainService = defineDAINService({
         tokenUrl: "https://oauth2.googleapis.com/token",
         scopes: [
           "https://www.googleapis.com/auth/gmail.compose",
+          "https://www.googleapis.com/auth/gmail.readonly",
           "email",
           "profile",
         ],
