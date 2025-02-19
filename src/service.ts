@@ -12,6 +12,10 @@ import { modifyMessageConfig } from "./tools/messages/modify-message-tool";
 import { sendMessageConfig } from "./tools/messages/send-message-tool";
 import { trashMessageConfig } from "./tools/messages/trash-message-tool";
 import { untrashMessageConfig } from "./tools/messages/untrash-message-tool";
+import { listLabelsConfig } from "./tools/labels/list-labels-tool";
+import { createLabelConfig } from "./tools/labels/create-label-tool";
+import { updateLabelConfig } from "./tools/labels/update-label-tool";
+import { deleteLabelConfig } from "./tools/labels/delete-label-tool";
 
 export const dainService = defineDAINService({
   metadata: {
@@ -38,6 +42,10 @@ export const dainService = defineDAINService({
     untrashMessageConfig,
     modifyMessageConfig,
     sendMessageConfig,
+    listLabelsConfig,
+    createLabelConfig,
+    updateLabelConfig,
+    deleteLabelConfig,
   ],
   oauth2: {
     baseUrl: process.env.TUNNEL_URL || "http://localhost:2022",
@@ -51,6 +59,7 @@ export const dainService = defineDAINService({
           "https://www.googleapis.com/auth/gmail.compose",
           "https://www.googleapis.com/auth/gmail.readonly",
           "https://www.googleapis.com/auth/gmail.modify",
+          "https://www.googleapis.com/auth/gmail.labels",
           "email",
           "profile",
         ],
