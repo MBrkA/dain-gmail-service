@@ -76,17 +76,44 @@ const listDraftsConfig: ToolConfig = {
         };
       }
 
-      // Create table UI with draft information
+      // Get full draft details including subject
+      const draftsWithDetails = await Promise.all(
+        response.data.drafts.map(async (draft: any) => {
+          const draftDetails = await axios.get(
+            `https://gmail.googleapis.com/gmail/v1/users/me/drafts/${draft.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${tokens.accessToken}`,
+              },
+            }
+          );
+          
+          // Extract subject from headers
+          const headers = draftDetails.data.message.payload.headers;
+          const subject = headers.find((h: any) => h.name.toLowerCase() === 'subject')?.value || '(No Subject)';
+          
+          return {
+            ...draft,
+            subject
+          };
+        })
+      );
+
+      // Create table UI with draft information including subject
       const tableUI = new TableUIBuilder()
         .addColumns([
           { key: "id", header: "Draft ID", type: "text" },
+          { key: "subject", header: "Subject", type: "text" },
           { key: "threadId", header: "Thread ID", type: "text" },
         ])
-        .rows(response.data.drafts);
+        .rows(draftsWithDetails);
 
       return {
-        text: `Found ${response.data.drafts.length} drafts`,
-        data: response.data,
+        text: `Found ${draftsWithDetails.length} drafts`,
+        data: {
+          ...response.data,
+          drafts: draftsWithDetails
+        },
         ui: tableUI.build(),
       };
     } catch (error: any) {

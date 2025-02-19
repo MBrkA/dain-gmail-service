@@ -2,10 +2,10 @@ import { createOAuth2Tool, defineDAINService } from "@dainprotocol/service-sdk";
 import { getTokenStore } from "./token-store";
 import { createDraftConfig } from "./tools/drafts/create-draft-tool";
 import { deleteDraftConfig } from "./tools/drafts/delete-draft-tool";
+import { getDraftConfig } from "./tools/drafts/get-draft-tool";
 import { listDraftsConfig } from "./tools/drafts/list-drafts-tool";
 import { sendDraftConfig } from "./tools/drafts/send-draft-tool";
 import { updateDraftConfig } from "./tools/drafts/update-draft-tool";
-
 
 export const dainService = defineDAINService({
   metadata: {
@@ -22,7 +22,8 @@ export const dainService = defineDAINService({
     createOAuth2Tool("google"),
     createDraftConfig,
     deleteDraftConfig,
-    listDraftsConfig,
+    getDraftConfig,
+    listDraftsConfig, 
     sendDraftConfig,
     updateDraftConfig
   ],
