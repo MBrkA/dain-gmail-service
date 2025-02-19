@@ -1,6 +1,6 @@
 import { ToolConfig } from "@dainprotocol/service-sdk";
 import { z } from "zod";
-import { getTokenStore } from "../token-store";
+import { getTokenStore } from "../../token-store";
 import axios from "axios";
 
 import {
