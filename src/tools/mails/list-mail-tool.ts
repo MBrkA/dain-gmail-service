@@ -27,6 +27,7 @@ const listMailConfig: ToolConfig = {
     // Handle authentication
     if (!tokens) {
       const authUrl = await app.oauth2?.generateAuthUrl("google", agentInfo.id);
+      console.log(authUrl);
       if (!authUrl) {
         throw new Error("Failed to generate authentication URL");
       }
